@@ -7,21 +7,19 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign.Companion.Center
+import androidx.compose.ui.text.style.TextAlign.Companion.End
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.prospect.fatuapp.components.MyButton
@@ -68,8 +66,8 @@ fun Oder(
         mutableStateOf("")
     }
     val context = LocalContext.current
-
-        Column(modifier = Modifier.padding(1.dp)) {
+     Column(modifier = Modifier.padding(9.dp))
+             {
         TopAppBar(title = {
             Text(text = "FatuApp")
         },
@@ -81,141 +79,149 @@ fun Oder(
         )
 
         // Content
-        Row()
-        {
-            Row() {
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                )
-                {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp)
+            ){
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.TopStart),
+                    text = code,
+                    label = "code",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) code = it
+                    } )
 
-                    MyInputText(
-                        modifier = Modifier.width(100.dp),
-                        text = code,
-                        label = "code",
-                        onTextChange = {
-                            if (it.all { char ->
-                                    char.isLetter() || char.isWhitespace()
-                                }) code = it
-                        } )
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.TopCenter),
+                    text = name,
+                    label = "name",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) name = it
+                    })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.TopEnd),
+                    text = marque,
+                    label = "marque",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) marque = it
+                    })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.CenterStart),
+                    text = prix_achat,
+                    label = "P.A",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) prix_achat = it
+                    })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.Center),
+                    text = prix_vente,
+                    label = "P.V",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) prix_vente = it
+                    })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.CenterEnd),
+                    text = prix_achat_T,
+                    label = "P.A.T",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) prix_achat_T = it
+                    })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.BottomStart),
+                    text = prix_vente_T,
+                    label = "P.V.T",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) prix_vente_T = it
+                    })
 
-                    MyInputText(
-                        modifier = Modifier.width(100.dp),
-                        text = name,
-                        label = "name",
-                        onTextChange = {
-                            if (it.all { char ->
-                                    char.isLetter() || char.isWhitespace()
-                                }) name = it
-                        })
-                    MyInputText(
-                        modifier = Modifier.width(100.dp),
-                        text = marque,
-                        label = "marque",
-                        onTextChange = {
-                            if (it.all { char ->
-                                    char.isLetter() || char.isWhitespace()
-                                }) marque = it
-                        })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.BottomCenter),
+                    text = benefice,
+                    label = "Benefice",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) benefice = it
+                    })
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.BottomEnd),
+                    text = Q,
+                    label = "Q",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isLetter() || char.isWhitespace()
+                            }) Q = it
+                    })
 
-                }
+
             }
-            Row() {
-                Column()
-                {
-                    MyInputText(
-                        modifier = Modifier.width(100.dp),
-                        text = prix_achat,
-                        label = "P.A",
-                        onTextChange = {
-                            if (it.all { char ->
-                                    char.isLetter() || char.isWhitespace()
-                                }) prix_achat = it
-                        })
-                    MyInputText(
-                        modifier = Modifier.width(100.dp),
-                        text = prix_vente,
-                        label = "P.V",
-                        onTextChange = {
-                            if (it.all { char ->
-                                    char.isLetter() || char.isWhitespace()
-                                }) prix_vente = it
-                        })
-                    MyInputText(
-                        modifier = Modifier.width(100.dp),
-                        text = prix_achat_T,
-                        label = "P.A.T",
-                        onTextChange = {
-                            if (it.all { char ->
-                                    char.isLetter() || char.isWhitespace()
-                                }) prix_achat_T = it
-                        })
-
-                }
+            Spacer(modifier = Modifier.padding(10.dp))
+            Column(modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                MyButton(text = "Save",
+                    onClick = {
+                        if (name.isNotEmpty() && marque.isNotEmpty() &&
+                            prix_vente.isNotEmpty() && prix_achat.isNotEmpty() &&
+                            prix_achat_T.isNotEmpty() && prix_achat_T.isNotEmpty()&& benefice.isNotEmpty()) {
+                            onAddOder_Product(
+                                Oder_Product(code = code,
+                                    name = name,
+                                    marque = marque,
+                                    prix_achat = prix_achat,
+                                    prix_vente= prix_vente,
+                                    prix_achat_T = prix_achat_T,
+                                    prix_vente_T=prix_vente_T,
+                                    benefice = benefice,
+                                    Q=Q)
+                            )
+                            code=""
+                            name = ""
+                            marque = ""
+                            prix_achat = ""
+                            prix_vente= ""
+                            prix_achat_T = ""
+                            prix_vente_T=""
+                            benefice =""
+                            Q=""
+                            Toast.makeText(context, "Oder_Product Added",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    })
             }
-Row() {
-    Column() {
-        MyInputText(
-            modifier = Modifier.width(100.dp),
-            text = prix_vente_T,
-            label = "P.V.T",
-            onTextChange = {
-                if (it.all { char ->
-                        char.isLetter() || char.isWhitespace()
-                    }) prix_vente_T = it
-            })
 
-        MyInputText(
-            modifier = Modifier.width(100.dp),
-            text = benefice,
-            label = "Benefice",
-            onTextChange = {
-                if (it.all { char ->
-                        char.isLetter() || char.isWhitespace()
-                    }) benefice = it
-            })
-        MyInputText(
-            modifier = Modifier.width(100.dp),
-            text = Q,
-            label = "Q",
-            onTextChange = {
-                if (it.all { char ->
-                        char.isLetter() || char.isWhitespace()
-                    }) Q = it
-            })
-
-    }
-}
-           MyButton(text = "Save",
-                onClick = {
-                    if (name.isNotEmpty() && marque.isNotEmpty() &&
-                        prix_vente.isNotEmpty() && prix_achat.isNotEmpty() &&
-                        prix_achat_T.isNotEmpty() && prix_achat_T.isNotEmpty()&& benefice.isNotEmpty()) {
-                        onAddOder_Product(
-                            Oder_Product(code = code,
-                                name = name,
-                                marque = marque,
-                                prix_achat = prix_achat,
-                                prix_vente= prix_vente,
-                                prix_achat_T = prix_achat_T,
-                                prix_vente_T=prix_vente_T,
-                                benefice = benefice,
-                                Q=Q)
-                        )
-                        code=""
-                        name = ""
-                        marque = ""
-                        prix_achat = ""
-                        prix_vente= ""
-                        prix_achat_T = ""
-                        prix_vente_T=""
-                        benefice =""
-                        Q=""
-                        Toast.makeText(context, "Oder_Product Added",
-                            Toast.LENGTH_SHORT).show()
-                    }
-                })
-        }
         Divider(modifier = Modifier.padding(10.dp))
         LazyColumn{
             items(Oder_Products){ Oder_Product ->
@@ -225,8 +231,6 @@ Row() {
         }
 
     }
-    // Smooth scroll to specified pixels on first composition
-
 }
 
 @Composable
@@ -239,30 +243,154 @@ fun Oder_ProductRow(
             .padding(4.dp)
             .clip(RoundedCornerShape(topEnd = 33.dp, bottomStart = 33.dp))
             .fillMaxWidth(),
-        color = Color(0xFFDFE6EB),
+        color = Color(0xFF2196F3),
         elevation = 1.dp) {
         Column(modifier
             .clickable { onOder_ProductClicked(Oder_Product) }
             .padding(horizontal = 14.dp, vertical = 1.dp),
             horizontalAlignment = Alignment.Start) {
-            Text(text = Oder_Product.code,
-                style = MaterialTheme.typography.subtitle2)
-            Text(text = Oder_Product.name, style = MaterialTheme.typography.subtitle1)
-            Text(text = Oder_Product.marque,
-                style = MaterialTheme.typography.subtitle2)
-            Text(text = Oder_Product.prix_achat, style = MaterialTheme.typography.subtitle1)
-            Text(text = Oder_Product.prix_vente,
-                style = MaterialTheme.typography.subtitle2)
-            Text(text = Oder_Product.prix_achat_T, style = MaterialTheme.typography.subtitle1)
-            Text(text = Oder_Product.prix_vente_T,
-                style = MaterialTheme.typography.subtitle2)
-            Text(text = Oder_Product.benefice, style = MaterialTheme.typography.subtitle1)
-            Text(text = formatDate(Oder_Product.entryDate.time),
-                style = MaterialTheme.typography.caption)
 
+                Column {
+                    Spacer(modifier = Modifier.padding(3.dp))
+                    Row {
+                        Box(modifier=Modifier.fillMaxWidth().height(40.dp)) {
+                            Text("Code",
+                                modifier=Modifier.align(alignment = Alignment.TopStart),
+                                color=Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(text = "Name",
+                                modifier=Modifier.align(alignment = Alignment.TopCenter),
+
+                                color=Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(text = "Marque",
+                                modifier=Modifier.align(alignment = Alignment.TopEnd),
+                                color=Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+
+                                )
+                            Text(text = Oder_Product.code,
+                                modifier=Modifier.align(alignment = Alignment.BottomStart),
+                                color=Color.White,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(text = Oder_Product.name,
+                                modifier=Modifier.align(alignment = Alignment.BottomCenter),
+
+                                color=Color.White,
+                                style = MaterialTheme.typography.subtitle1,
+                            )
+                            Text(text = Oder_Product.marque,
+                                modifier=Modifier.align(alignment = Alignment.BottomEnd),
+                                color=Color.White,
+                                style = MaterialTheme.typography.subtitle2,
+                                textAlign = End
+                            )
+                        }
+                    }
+                    Row() {
+                        Box(modifier = Modifier.fillMaxWidth().height(40.dp)) {
+                            Text(
+                                "PA",
+                                modifier = Modifier.align(alignment = Alignment.TopStart),
+                                color = Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(
+                                text = "PV",
+                                modifier = Modifier.align(alignment = Alignment.TopCenter),
+
+                                color = Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(
+                                text = "PAT",
+                                modifier = Modifier.align(alignment = Alignment.TopEnd),
+                                color = Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+
+                                )
+                            Text(
+                                text = Oder_Product.prix_achat,
+                                modifier = Modifier.align(alignment = Alignment.BottomStart),
+                                color = Color.White,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(
+                                text = Oder_Product.prix_vente,
+                                modifier = Modifier.align(alignment = Alignment.BottomCenter),
+
+                                color = Color.White,
+                                style = MaterialTheme.typography.subtitle1,
+                            )
+                            Text(
+                                text = Oder_Product.prix_achat_T,
+                                modifier = Modifier.align(alignment = Alignment.BottomEnd),
+                                color = Color.White,
+                                style = MaterialTheme.typography.subtitle2,
+                                textAlign = End
+                            )
+                        }
+                    }
+                    Row() {
+                        Box(modifier = Modifier.fillMaxWidth().height(40.dp)) {
+                            Text(
+                                "PVT",
+                                modifier = Modifier.align(alignment = Alignment.TopStart),
+                                color = Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(
+                                text = "Benefice",
+                                modifier = Modifier.align(alignment = Alignment.TopCenter),
+
+                                color = Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(
+                                text = "Quantity",
+                                modifier = Modifier.align(alignment = Alignment.TopEnd),
+                                color = Color.LightGray,
+                                style = MaterialTheme.typography.subtitle2,
+
+                                )
+                            Text(
+                                text = Oder_Product.prix_vente_T,
+                                modifier = Modifier.align(alignment = Alignment.BottomStart),
+                                color = Color.White,
+                                style = MaterialTheme.typography.subtitle2,
+                            )
+                            Text(
+                                text = Oder_Product.benefice,
+                                modifier = Modifier.align(alignment = Alignment.BottomCenter),
+
+                                color = Color.White,
+                                style = MaterialTheme.typography.subtitle1,
+                            )
+                            Text(
+                                text = Oder_Product.Q,
+                                modifier = Modifier.align(alignment = Alignment.BottomEnd),
+                                color = Color.White,
+                                style = MaterialTheme.typography.subtitle2,
+                                textAlign = End
+                            )
+                        }
+                        }
+
+                    Spacer(modifier = Modifier.padding(5.dp))
+                    Column(modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(text = formatDate(Oder_Product.entryDate.time),
+                            style = MaterialTheme.typography.caption)
+                    }
+                    }
+
+            }
         }
     }
-}
+
 @RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalComposeUiApi
 @Preview(showBackground = true)
