@@ -22,7 +22,6 @@ interface MyDao {
 
     @Query("DELETE from Oder_Products_tbl")
     suspend fun deleteAll()
-
     @Delete
     suspend fun deleteOder_Product(oder_Product: Oder_Product)
 

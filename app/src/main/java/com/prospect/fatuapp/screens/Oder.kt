@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign.Companion.Center
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign.Companion.End
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -69,13 +69,18 @@ fun Oder(
      Column(modifier = Modifier.padding(9.dp))
              {
         TopAppBar(title = {
-            Text(text = "FatuApp")
+            Text(text = "FatuApp",
+            color= Color.White,
+                fontWeight = FontWeight.Bold
+            )
         },
             actions = {
                 Icon(imageVector = Icons.Rounded.Check,
-                    contentDescription = "Icon")
+                    contentDescription = "Icon",
+                    modifier=Modifier.padding(5.dp),
+                    tint = Color.White)
             },
-            backgroundColor = Color(0xFFDADFE3)
+            backgroundColor = Color(0xFFDEB6AB)
         )
 
         // Content
@@ -94,7 +99,8 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) code = it
-                    } )
+                    }
+                     )
 
                 MyInputText(
                     modifier = Modifier
@@ -106,7 +112,9 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) name = it
-                    })
+                    },
+
+                )
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -117,7 +125,9 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) marque = it
-                    })
+                    },
+                )
+
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -139,7 +149,9 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) prix_vente = it
-                    })
+                    },
+
+                )
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -150,7 +162,9 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) prix_achat_T = it
-                    })
+                    },
+                )
+
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -161,7 +175,9 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) prix_vente_T = it
-                    })
+                    },
+
+                )
 
                 MyInputText(
                     modifier = Modifier
@@ -173,7 +189,8 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) benefice = it
-                    })
+                    },
+                )
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -184,14 +201,14 @@ fun Oder(
                         if (it.all { char ->
                                 char.isLetter() || char.isWhitespace()
                             }) Q = it
-                    })
-
-
+                    },
+                )
             }
             Spacer(modifier = Modifier.padding(10.dp))
             Column(modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                MyButton(text = "Save",
+                MyButton(modifier=Modifier.width(100.dp).height(70.dp),
+                    text = "Save",
                     onClick = {
                         if (name.isNotEmpty() && marque.isNotEmpty() &&
                             prix_vente.isNotEmpty() && prix_achat.isNotEmpty() &&
@@ -210,16 +227,19 @@ fun Oder(
                             code=""
                             name = ""
                             marque = ""
-                            prix_achat = ""
-                            prix_vente= ""
+                            prix_achat=""
+                            prix_vente = ""
                             prix_achat_T = ""
-                            prix_vente_T=""
-                            benefice =""
+                            prix_vente_T = ""
+                            benefice=""
                             Q=""
+
+
                             Toast.makeText(context, "Oder_Product Added",
                                 Toast.LENGTH_SHORT).show()
                         }
-                    })
+                    }
+                )
             }
 
         Divider(modifier = Modifier.padding(10.dp))
@@ -243,7 +263,7 @@ fun Oder_ProductRow(
             .padding(4.dp)
             .clip(RoundedCornerShape(topEnd = 33.dp, bottomStart = 33.dp))
             .fillMaxWidth(),
-        color = Color(0xFF2196F3),
+        color = Color(0xFFECCCB2),
         elevation = 1.dp) {
         Column(modifier
             .clickable { onOder_ProductClicked(Oder_Product) }
@@ -256,21 +276,23 @@ fun Oder_ProductRow(
                         Box(modifier=Modifier.fillMaxWidth().height(40.dp)) {
                             Text("Code",
                                 modifier=Modifier.align(alignment = Alignment.TopStart),
-                                color=Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
                             )
                             Text(text = "Name",
                                 modifier=Modifier.align(alignment = Alignment.TopCenter),
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
 
-                                color=Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
                             )
                             Text(text = "Marque",
                                 modifier=Modifier.align(alignment = Alignment.TopEnd),
-                                color=Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
-
-                                )
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
+                            )
                             Text(text = Oder_Product.code,
                                 modifier=Modifier.align(alignment = Alignment.BottomStart),
                                 color=Color.White,
@@ -278,9 +300,8 @@ fun Oder_ProductRow(
                             )
                             Text(text = Oder_Product.name,
                                 modifier=Modifier.align(alignment = Alignment.BottomCenter),
-
                                 color=Color.White,
-                                style = MaterialTheme.typography.subtitle1,
+                                style = MaterialTheme.typography.subtitle2,
                             )
                             Text(text = Oder_Product.marque,
                                 modifier=Modifier.align(alignment = Alignment.BottomEnd),
@@ -290,26 +311,30 @@ fun Oder_ProductRow(
                             )
                         }
                     }
+                    Spacer(modifier = Modifier.padding(7.dp))
+
                     Row() {
                         Box(modifier = Modifier.fillMaxWidth().height(40.dp)) {
                             Text(
                                 "PA",
                                 modifier = Modifier.align(alignment = Alignment.TopStart),
-                                color = Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
                             )
                             Text(
                                 text = "PV",
                                 modifier = Modifier.align(alignment = Alignment.TopCenter),
-
-                                color = Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
                             )
                             Text(
                                 text = "PAT",
                                 modifier = Modifier.align(alignment = Alignment.TopEnd),
-                                color = Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
 
                                 )
                             Text(
@@ -321,9 +346,8 @@ fun Oder_ProductRow(
                             Text(
                                 text = Oder_Product.prix_vente,
                                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
-
                                 color = Color.White,
-                                style = MaterialTheme.typography.subtitle1,
+                                style = MaterialTheme.typography.subtitle2,
                             )
                             Text(
                                 text = Oder_Product.prix_achat_T,
@@ -334,45 +358,49 @@ fun Oder_ProductRow(
                             )
                         }
                     }
+                    Spacer(modifier = Modifier.padding(7.dp))
+
                     Row() {
                         Box(modifier = Modifier.fillMaxWidth().height(40.dp)) {
                             Text(
                                 "PVT",
                                 modifier = Modifier.align(alignment = Alignment.TopStart),
-                                color = Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
+
                             )
                             Text(
                                 text = "Benefice",
                                 modifier = Modifier.align(alignment = Alignment.TopCenter),
-
-                                color = Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
                             )
                             Text(
                                 text = "Quantity",
                                 modifier = Modifier.align(alignment = Alignment.TopEnd),
-                                color = Color.LightGray,
-                                style = MaterialTheme.typography.subtitle2,
-
+                                color=Color(0xffAC7088),
+                                style = MaterialTheme.typography.subtitle1,
+                                fontWeight = FontWeight.ExtraBold
                                 )
                             Text(
                                 text = Oder_Product.prix_vente_T,
                                 modifier = Modifier.align(alignment = Alignment.BottomStart),
-                                color = Color.White,
+                                color = Color.Black,
                                 style = MaterialTheme.typography.subtitle2,
                             )
                             Text(
                                 text = Oder_Product.benefice,
                                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
 
-                                color = Color.White,
-                                style = MaterialTheme.typography.subtitle1,
+                                color = Color.Black,
+                                style = MaterialTheme.typography.subtitle2,
                             )
                             Text(
                                 text = Oder_Product.Q,
                                 modifier = Modifier.align(alignment = Alignment.BottomEnd),
-                                color = Color.White,
+                                color = Color.Black,
                                 style = MaterialTheme.typography.subtitle2,
                                 textAlign = End
                             )
@@ -383,7 +411,10 @@ fun Oder_ProductRow(
                     Column(modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(text = formatDate(Oder_Product.entryDate.time),
-                            style = MaterialTheme.typography.caption)
+                            color=Color.White,
+                            style = MaterialTheme.typography.caption,
+                            fontWeight = FontWeight.Bold
+                                   )
                     }
                     }
 
