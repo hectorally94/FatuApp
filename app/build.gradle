@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.prospect.noteapp'
+    namespace 'com.prospect.fatuapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.prospect.noteapp"
+        applicationId "com.prospect.fatuapp"
         minSdk 21
         targetSdk 33
         versionCode 1

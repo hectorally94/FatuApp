@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
@@ -19,6 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign.Companion.End
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -97,10 +101,11 @@ fun Oder(
                     label = "code",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isLetterOrDigit() || char.isWhitespace()
                             }) code = it
-                    }
-                     )
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                )
 
                 MyInputText(
                     modifier = Modifier
@@ -110,9 +115,10 @@ fun Oder(
                     label = "name",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isLetterOrDigit() || char.isWhitespace()
                             }) name = it
                     },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
 
                 )
                 MyInputText(
@@ -123,11 +129,25 @@ fun Oder(
                     label = "marque",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isLetterOrDigit() || char.isWhitespace()
                             }) marque = it
                     },
-                )
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
 
+                )
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .align(Alignment.BottomEnd),
+                    text = Q,
+                    label = "Q",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isDigit() || char.isWhitespace()
+                            }) Q = it
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -136,9 +156,11 @@ fun Oder(
                     label = "P.A",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isDigit() || char.isWhitespace()
                             }) prix_achat = it
-                    })
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
@@ -147,10 +169,10 @@ fun Oder(
                     label = "P.V",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isDigit() || char.isWhitespace()
                             }) prix_vente = it
                     },
-
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
                 MyInputText(
                     modifier = Modifier
@@ -160,9 +182,10 @@ fun Oder(
                     label = "P.A.T",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isDigit() || char.isWhitespace()
                             }) prix_achat_T = it
                     },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
 
                 MyInputText(
@@ -173,10 +196,10 @@ fun Oder(
                     label = "P.V.T",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isDigit() || char.isWhitespace()
                             }) prix_vente_T = it
                     },
-
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
 
                 MyInputText(
@@ -187,22 +210,13 @@ fun Oder(
                     label = "Benefice",
                     onTextChange = {
                         if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
+                                char.isDigit() || char.isWhitespace()
                             }) benefice = it
                     },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
-                MyInputText(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .align(Alignment.BottomEnd),
-                    text = Q,
-                    label = "Q",
-                    onTextChange = {
-                        if (it.all { char ->
-                                char.isLetter() || char.isWhitespace()
-                            }) Q = it
-                    },
-                )
+
+
             }
             Spacer(modifier = Modifier.padding(10.dp))
             Column(modifier = Modifier.fillMaxWidth(),
