@@ -3,14 +3,15 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+
 }
 
 android {
-    namespace 'com.prospect.fatuapp'
+    namespace 'com.prospect.noteapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.prospect.fatuapp"
+        applicationId "com.prospect.noteapp"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -29,8 +30,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_9
-        targetCompatibility JavaVersion.VERSION_1_9
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
         coreLibraryDesugaringEnabled true
     }
     kotlinOptions {
@@ -51,7 +52,6 @@ android {
 }
 
 dependencies {
-
     //Hilt-Dagger
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
@@ -87,4 +87,7 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0"
+}
+kapt {
+    correctErrorTypes true
 }

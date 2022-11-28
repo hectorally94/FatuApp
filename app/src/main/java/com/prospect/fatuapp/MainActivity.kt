@@ -34,6 +34,12 @@ class MainActivity : ComponentActivity() {
                     val noteViewModel = viewModel<oderViewModel>()
                     NotesApp(noteViewModel)
 
+
+
+
+
+
+
                 }
             }
         }
@@ -48,7 +54,8 @@ fun NotesApp(oderViewModel: oderViewModel) {
 
     Oder(Oder_Products = oderList,
         onRemoveOder_Product = { oderViewModel.removeNote(it) },
-        onAddOder_Product = { oderViewModel.addNote(it) })
+        onAddOder_Product = { oderViewModel.addNote(it) }
+        )
 
 }
 
