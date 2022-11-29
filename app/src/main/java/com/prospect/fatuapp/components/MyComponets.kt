@@ -1,20 +1,16 @@
 package com.prospect.fatuapp.components
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.sp
 
 
@@ -26,6 +22,7 @@ fun MyInputText(
     label: String,
     maxLine: Int = 1,
     onTextChange: (String) -> Unit,
+    onImeAction: () -> Unit = {},
     keyboardOptions: KeyboardOptions,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -42,7 +39,10 @@ fun MyInputText(
         maxLines = maxLine,
         label = { Text(text = label) },
         keyboardOptions=keyboardOptions,
-                modifier = modifier
+        keyboardActions = KeyboardActions(onDone = {
+            onImeAction()
+            keyboardController?.hide()
+        }),        modifier = modifier
     )
 
 }

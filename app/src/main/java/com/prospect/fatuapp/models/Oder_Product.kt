@@ -29,13 +29,13 @@ data class Oder_Product  @RequiresApi(Build.VERSION_CODES.O) constructor(
     val prix_achat: String,
 
     @ColumnInfo(name = "Oder_Product_prix_vente_T")
-    val prix_vente_T: String,
+    val prix_vente_T: Int,
 
     @ColumnInfo(name = "Oder_Product_prix_achat_T")
-    val prix_achat_T: String,
+    val prix_achat_T: Int,
 
     @ColumnInfo(name = "Oder_Product_benefice")
-    val benefice: String,
+    val benefice: Int,
     @ColumnInfo(name="oder_product_Q")
     val Q:String,
 

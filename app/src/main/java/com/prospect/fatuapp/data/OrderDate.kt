@@ -15,10 +15,10 @@ class OrderDate {
                 marque = "Samesung galaxie",
                 prix_vente = "12000",
                 prix_achat = "13000",
-                prix_vente_T = "120000",
-                prix_achat_T = "130000",
+                prix_vente_T = 120000,
+                prix_achat_T = 130000,
                 Q = "10",
-                benefice ="10000",
+                benefice =10000
             )
 
 

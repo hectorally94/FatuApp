@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,9 +20,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.text.style.TextAlign.Companion.End
+import androidx.compose.ui.text.style.TextAlign.Companion.Start
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.prospect.fatuapp.components.MyButton
@@ -57,23 +58,19 @@ fun Oder(
     var prix_achat by remember {
         mutableStateOf("")
     }
-    var prix_achat_T by remember {
+    var Q by  remember {
         mutableStateOf("")
     }
-    var prix_vente_T by remember {
-        mutableStateOf("")
-    }
-    var benefice by remember {
-        mutableStateOf("")
-    }
-    var Q by remember {
-        mutableStateOf("")
-    }
+
+    var prix_achat_T =0
+    var prix_vente_T=0
+    var benefice=0
     val context = LocalContext.current
+
      Column(modifier = Modifier.padding(9.dp))
              {
         TopAppBar(title = {
-            Text(text = "FatuApp",
+            Text(text = "App",
             color= Color.White,
                 fontWeight = FontWeight.Bold
             )
@@ -91,7 +88,7 @@ fun Oder(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)
+                    .height(180.dp)
             ){
                 MyInputText(
                     modifier = Modifier
@@ -133,33 +130,6 @@ fun Oder(
                             }) marque = it
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-
-                )
-                MyInputText(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .align(Alignment.BottomEnd),
-                    text = Q,
-                    label = "Q",
-                    onTextChange = {
-                        if (it.all { char ->
-                                char.isDigit() || char.isWhitespace()
-                            }) Q = it
-                    },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-                MyInputText(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .align(Alignment.CenterStart),
-                    text = prix_achat,
-                    label = "P.A",
-                    onTextChange = {
-                        if (it.all { char ->
-                                char.isDigit() || char.isWhitespace()
-                            }) prix_achat = it
-                    },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
                 MyInputText(
                     modifier = Modifier
@@ -177,75 +147,80 @@ fun Oder(
                 MyInputText(
                     modifier = Modifier
                         .width(100.dp)
+                        .align(Alignment.CenterStart),
+                    text = prix_achat,
+                    label = "P.A",
+                    onTextChange = {
+                        if (it.all { char ->
+                                char.isDigit() || char.isWhitespace()
+                            }) prix_achat = it
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+
+                MyInputText(
+                    modifier = Modifier
+                        .width(100.dp)
                         .align(Alignment.CenterEnd),
-                    text = prix_achat_T,
-                    label = "P.A.T",
+                    text = Q,
+                    label = "Quatite",
                     onTextChange = {
                         if (it.all { char ->
                                 char.isDigit() || char.isWhitespace()
-                            }) prix_achat_T = it
+                            })
+                            Q = it
+
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
-
-                MyInputText(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .align(Alignment.BottomStart),
-                    text = prix_vente_T,
-                    label = "P.V.T",
-                    onTextChange = {
-                        if (it.all { char ->
-                                char.isDigit() || char.isWhitespace()
-                            }) prix_vente_T = it
-                    },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-
-                MyInputText(
-                    modifier = Modifier
-                        .width(100.dp)
-                        .align(Alignment.BottomCenter),
-                    text = benefice,
-                    label = "Benefice",
-                    onTextChange = {
-                        if (it.all { char ->
-                                char.isDigit() || char.isWhitespace()
-                            }) benefice = it
-                    },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                )
-
-
+                if (prix_achat.isNotEmpty() && Q.isNotEmpty()){
+                    val p = Integer.parseInt(prix_achat)
+                    val q = Integer.parseInt(Q)
+                     prix_achat_T = p * q
+                }
+                if (prix_vente.isNotEmpty() && Q.isNotEmpty()){
+                    val p = Integer.parseInt(prix_vente)
+                    val q = Integer.parseInt(Q)
+                     prix_vente_T = p * q
+                }
+                if (prix_achat_T != 0 && prix_vente_T!=0){
+                    val p = prix_vente_T
+                    val q = prix_achat_T
+                     benefice = p - q
+                }
+           /*       Text(text = "PVT: $prix_vente_T FBU", modifier=Modifier.padding(10.dp), textAlign = Start)
+                Text(text = "PAT: $prix_achat_T FBU", modifier=Modifier.padding(10.dp), textAlign = Center)
+                Text(text = "benefice: $benefice FBU", modifier=Modifier.padding(10.dp), textAlign = End)
+            */
             }
-            Spacer(modifier = Modifier.padding(10.dp))
-            Column(modifier = Modifier.fillMaxWidth(),
+
+                 Column(modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                MyButton(modifier=Modifier.width(100.dp).height(70.dp),
+                MyButton(modifier= Modifier
+                    .width(100.dp)
+                    .height(70.dp),
                     text = "Save",
                     onClick = {
                         if (name.isNotEmpty() && marque.isNotEmpty() &&
                             prix_vente.isNotEmpty() && prix_achat.isNotEmpty() &&
-                            prix_achat_T.isNotEmpty() && prix_achat_T.isNotEmpty()&& benefice.isNotEmpty()) {
+                            Q.isNotEmpty()) {
                             onAddOder_Product(
-                                Oder_Product(code = code,
+                                Oder_Product(
+                                    code = code,
                                     name = name,
                                     marque = marque,
                                     prix_achat = prix_achat,
-                                    prix_vente= prix_vente,
+                                    prix_vente = prix_vente,
                                     prix_achat_T = prix_achat_T,
-                                    prix_vente_T=prix_vente_T,
+                                    prix_vente_T =prix_vente_T,
                                     benefice = benefice,
-                                    Q=Q)
+                                    Q =Q)
                             )
                             code=""
                             name = ""
                             marque = ""
                             prix_achat=""
                             prix_vente = ""
-                            prix_achat_T = ""
-                            prix_vente_T = ""
-                            benefice=""
                             Q=""
 
 
@@ -263,9 +238,10 @@ fun Oder(
                     onOder_ProductClicked = { onRemoveOder_Product(it) })
             }
         }
-
     }
 }
+
+
 
 @Composable
 fun Oder_ProductRow(
@@ -287,7 +263,9 @@ fun Oder_ProductRow(
                 Column {
                     Spacer(modifier = Modifier.padding(3.dp))
                     Row {
-                        Box(modifier=Modifier.fillMaxWidth().height(40.dp)) {
+                        Box(modifier= Modifier
+                            .fillMaxWidth()
+                            .height(40.dp)) {
                             Text("Code",
                                 modifier=Modifier.align(alignment = Alignment.TopStart),
                                 color=Color(0xffAC7088),
@@ -328,7 +306,9 @@ fun Oder_ProductRow(
                     Spacer(modifier = Modifier.padding(7.dp))
 
                     Row() {
-                        Box(modifier = Modifier.fillMaxWidth().height(40.dp)) {
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .height(40.dp)) {
                             Text(
                                 "PA",
                                 modifier = Modifier.align(alignment = Alignment.TopStart),
@@ -364,7 +344,7 @@ fun Oder_ProductRow(
                                 style = MaterialTheme.typography.subtitle2,
                             )
                             Text(
-                                text = Oder_Product.prix_achat_T,
+                                text = Oder_Product.prix_achat_T.toString(),
                                 modifier = Modifier.align(alignment = Alignment.BottomEnd),
                                 color = Color.White,
                                 style = MaterialTheme.typography.subtitle2,
@@ -375,7 +355,9 @@ fun Oder_ProductRow(
                     Spacer(modifier = Modifier.padding(7.dp))
 
                     Row() {
-                        Box(modifier = Modifier.fillMaxWidth().height(40.dp)) {
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .height(40.dp)) {
                             Text(
                                 "PVT",
                                 modifier = Modifier.align(alignment = Alignment.TopStart),
@@ -399,13 +381,13 @@ fun Oder_ProductRow(
                                 fontWeight = FontWeight.ExtraBold
                                 )
                             Text(
-                                text = Oder_Product.prix_vente_T,
+                                text = Oder_Product.prix_vente_T.toString(),
                                 modifier = Modifier.align(alignment = Alignment.BottomStart),
                                 color = Color.Black,
                                 style = MaterialTheme.typography.subtitle2,
                             )
                             Text(
-                                text = Oder_Product.benefice,
+                                text = Oder_Product.benefice.toString(),
                                 modifier = Modifier.align(alignment = Alignment.BottomCenter),
 
                                 color = Color.Black,
