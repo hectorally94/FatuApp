@@ -1,6 +1,7 @@
 package com.prospect.fatuapp.viewModels
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prospect.fatuapp.models.Oder_Product
@@ -18,7 +19,8 @@ class oderViewModel @Inject constructor(private val repository: Repository) : Vi
 
     private val _noteList = MutableStateFlow<List<Oder_Product>>(emptyList())
     val noteList = _noteList.asStateFlow()
-    //private var noteList = mutableStateListOf<Note>()
+
+   // private var noteList = mutableStateListOf<Oder_Product>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -29,9 +31,7 @@ class oderViewModel @Inject constructor(private val repository: Repository) : Vi
                      }else {
                          _noteList.value = listOfNotes
                      }
-
                 }
-
         }
        // noteList.addAll(NotesDataSource().loadNotes())
     }

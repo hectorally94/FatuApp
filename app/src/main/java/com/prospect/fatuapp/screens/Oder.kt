@@ -27,21 +27,26 @@ import androidx.compose.ui.text.style.TextAlign.Companion.End
 import androidx.compose.ui.text.style.TextAlign.Companion.Start
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.prospect.fatuapp.components.MyButton
 import com.prospect.fatuapp.components.MyInputText
 import com.prospect.fatuapp.data.OrderDate
 import com.prospect.fatuapp.models.Oder_Product
 import com.prospect.fatuapp.utils.formatDate
+import com.prospect.fatuapp.viewModels.oderViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalComposeUiApi
 @Composable
+
 fun Oder(
-    Oder_Products: List<Oder_Product>,
-    onAddOder_Product: (Oder_Product) -> Unit,
-    onRemoveOder_Product: (Oder_Product) -> Unit
+    navController: NavController
 ) {
+    val viewmodel = hiltViewModel<oderViewModel>()
+    val state=viewmodel.noteList.collectAsState()
 
     var code by remember {
         mutableStateOf("")
@@ -204,7 +209,8 @@ fun Oder(
                         if (name.isNotEmpty() && marque.isNotEmpty() &&
                             prix_vente.isNotEmpty() && prix_achat.isNotEmpty() &&
                             Q.isNotEmpty()) {
-                            onAddOder_Product(
+
+                            viewmodel.addNote(
                                 Oder_Product(
                                     code = code,
                                     name = name,
@@ -216,6 +222,7 @@ fun Oder(
                                     benefice = benefice,
                                     Q =Q)
                             )
+
                             code=""
                             name = ""
                             marque = ""
@@ -233,9 +240,11 @@ fun Oder(
 
         Divider(modifier = Modifier.padding(10.dp))
         LazyColumn{
-            items(Oder_Products){ Oder_Product ->
+            items(state.value){ Oder_Product ->
                 Oder_ProductRow(Oder_Product = Oder_Product,
-                    onOder_ProductClicked = { onRemoveOder_Product(it) })
+                    onOder_ProductClicked = {
+                        viewmodel.removeNote(it)
+                    })
             }
         }
     }
@@ -423,5 +432,9 @@ fun Oder_ProductRow(
 @Preview(showBackground = true)
 @Composable
 fun Oder_ProductsScreenPreview() {
-    Oder(Oder_Products = OrderDate().loadOders(), onAddOder_Product = {}, onRemoveOder_Product = {})
+    val context= LocalContext.current
+
+    Oder(
+    navController = NavController(context)
+    )
 }

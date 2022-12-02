@@ -33,13 +33,6 @@ class MainActivity : ComponentActivity() {
                     //val noteViewModel = viewModel<NoteViewModel>() //also works
                     val noteViewModel = viewModel<oderViewModel>()
                     NotesApp(noteViewModel)
-
-
-
-
-
-
-
                 }
             }
         }
