@@ -46,7 +46,7 @@ fun Oder(
     navController: NavController
 ) {
     val viewmodel = hiltViewModel<oderViewModel>()
-    val state=viewmodel.noteList.collectAsState()
+    val state=viewmodel.noteList.collectAsState().value
 
     var code by remember {
         mutableStateOf("")
@@ -240,7 +240,7 @@ fun Oder(
 
         Divider(modifier = Modifier.padding(10.dp))
         LazyColumn{
-            items(state.value){ Oder_Product ->
+            items(state){ Oder_Product ->
                 Oder_ProductRow(Oder_Product = Oder_Product,
                     onOder_ProductClicked = {
                         viewmodel.removeNote(it)

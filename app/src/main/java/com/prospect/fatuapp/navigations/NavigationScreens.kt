@@ -37,9 +37,6 @@ fun NavigationScreens(){
         }
         composable(Screens.Oder.name){
             Oder(
-                Oder_Products= ,
-                onAddOder_Product= (Oder_Product) -> Unit,
-                onRemoveOder_Product=Oder_Product,
                 navController =navController
             )
         }
@@ -103,12 +100,6 @@ fun NavigationScreens(){
                 navController = navController
             )
         }
-
-
-
-
-
-
 
     }
 }
