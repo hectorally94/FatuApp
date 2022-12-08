@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FatuApp</string>
+    <string name="title_activity_buttom_navigation">ButtomNavigationActivity</string>
 </resources>

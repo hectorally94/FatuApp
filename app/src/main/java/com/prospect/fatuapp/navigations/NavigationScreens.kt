@@ -20,31 +20,12 @@ fun NavigationScreens(){
             Splash(navController=navController)
         }
 
-        composable(Screens.AddProductToPos.name){
-            AddProductToPos(
-                navController =navController
-            )
-        }
-        composable(Screens.DashBoard.name){
-            DashBoard(
-                navController =navController
-            )
-        }
         composable(Screens.Login.name){
             Login(
                 navController =navController
             )
         }
-        composable(Screens.Oder.name){
-            Oder(
-                navController =navController
-            )
-        }
-        composable(Screens.OderedProduct.name){
-           OderedProduct(
-                navController = navController
-            )
-        }
+
         composable(Screens.OderReport.name){
             OderReport(
                 navController = navController
@@ -85,16 +66,7 @@ fun NavigationScreens(){
                 navController = navController
             )
         }
-        composable(Screens.RestProduct.name){
-            RestProduct(
-                navController =navController
-            )
-        }
-        composable(Screens.ReturnedProduct.name){
-            ReturedProduct(
-                navController = navController
-            )
-        }
+
         composable(Screens.Statistics.name){
             Statistics(
                 navController = navController

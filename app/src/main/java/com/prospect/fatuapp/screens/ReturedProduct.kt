@@ -10,8 +10,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun ReturedProduct(
-    modifier: Modifier = Modifier,
-    navController: NavController
+    modifier: Modifier = Modifier
 ) {
     Box(modifier) {
         Text(text = "ReturedProduct")
@@ -21,5 +20,5 @@ fun ReturedProduct(
 @Preview(name = "ReturedProduct")
 @Composable
 private fun PreviewReturedProduct() {
-    ReturedProduct(navController = NavController(LocalContext.current))
+    ReturedProduct()
 }

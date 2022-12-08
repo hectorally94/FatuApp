@@ -11,7 +11,6 @@ import androidx.navigation.NavController
 @Composable
 fun RestProduct(
     modifier: Modifier = Modifier,
-    navController: NavController
 ) {
     Box(modifier) {
         Text(text = "RestProduct")
@@ -21,5 +20,5 @@ fun RestProduct(
 @Preview(name = "RestProduct")
 @Composable
 private fun PreviewRestProduct() {
-    RestProduct(navController = NavController(LocalContext.current))
+    RestProduct()
 }
